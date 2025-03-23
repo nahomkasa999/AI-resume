@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
@@ -7,9 +7,9 @@ const TemplateCard = ({ image, users }) => {
   const router = useRouter();
 
   return (
-    <div className="relative group inline-flex flex-none w-[300px] mx-3" id='templates'>
+    <div className="relative group inline-flex flex-none w-[300px] md:mx-3 mx-auto">
       {/* Template Image with Hover Effect */}
-      <div className="relative aspect-[3/4] w-full transition-all duration-300 group-hover: z-50">
+      <div className="relative aspect-[3/4] w-full transition-all duration-300 group-hover:z-50">
         <Image
           src={image}
           alt="Resume template"
@@ -39,7 +39,7 @@ const TemplateCard = ({ image, users }) => {
 
 const Template = () => {
   const sliderRef = useRef(null);
-  const SCROLL_SPEED = 3; // Seconds per slide
+  const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
 
   const templates = [
@@ -52,13 +52,30 @@ const Template = () => {
   ];
 
   useEffect(() => {
+    // Check if we're on mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Initial check
+    checkMobile();
+
+    // Add resize listener
+    window.addEventListener('resize', checkMobile);
+
+    // Only apply animation if not mobile
     const slider = sliderRef.current;
-    if (!slider) return;
+    if (!slider || isMobile) {
+      if (slider) {
+        slider.style.animation = 'none';
+        slider.style.transform = 'none';
+      }
+      return;
+    }
 
     const scrollWidth = slider.scrollWidth / 2;
-    const animationDuration = scrollWidth * SCROLL_SPEED / 100;
+    const animationDuration = scrollWidth * 3 / 100;
 
-    // Create and apply the animation
     const styleSheet = document.createElement("style");
     styleSheet.textContent = `
       @keyframes scroll {
@@ -81,9 +98,12 @@ const Template = () => {
     document.head.appendChild(styleSheet);
 
     return () => {
-      document.head.removeChild(styleSheet);
+      if (styleSheet.parentNode) {
+        document.head.removeChild(styleSheet);
+      }
+      window.removeEventListener('resize', checkMobile);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <section id="template" className="py-20 bg-indigo-900">
@@ -106,29 +126,34 @@ const Template = () => {
           </p>
         </div>
 
-        {/* Templates Slider */}
+        {/* Templates Container */}
         <div className="relative overflow-hidden">
           <div 
             ref={sliderRef}
-            className="flex gap-6 whitespace-nowrap template-slider"
+            className={`
+              ${isMobile 
+                ? 'flex flex-col gap-6 items-center' 
+                : 'flex gap-6 whitespace-nowrap template-slider'
+              }
+            `}
             style={{
               WebkitOverflowScrolling: 'touch',
               scrollbarWidth: 'none',
               msOverflowStyle: 'none'
             }}
           >
-            {/* First set of templates */}
+            {/* Show single set for mobile, double for desktop */}
             {templates.map((template, index) => (
               <TemplateCard
-                key={`first-${index}`}
+                key={`template-${index}`}
                 {...template}
               />
             ))}
             
-            {/* Duplicate set for seamless loop */}
-            {templates.map((template, index) => (
+            {/* Only show duplicate set for desktop sliding effect */}
+            {!isMobile && templates.map((template, index) => (
               <TemplateCard
-                key={`second-${index}`}
+                key={`template-duplicate-${index}`}
                 {...template}
               />
             ))}

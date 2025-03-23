@@ -21,7 +21,7 @@ const Navbar = () => {
 
   const navigation = [
     { name: 'Services', href: '#templates' },
-    { name: 'Success Rate', href: '#features' },
+    { name: 'what we do', href: '#benefits' },
     { name: 'Testimonials', href: '#testimonial' },
     { name: 'Pricing', href: '#pricing' },
     { name: 'Contact', href: '#contact' },
