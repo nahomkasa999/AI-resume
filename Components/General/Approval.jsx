@@ -1,22 +1,34 @@
-// Update the TwitterCard component to include likes and retweets props
-const TwitterCard = ({ username, handle, content, avatar, time, link, likes, retweets }) => {
-  // ... keep existing card structure ...
+"use client";
+import { useState } from 'react';
 
-  {/* Update Engagement Metrics */}
-  <div className="flex items-center space-x-4 text-gray-500 border-t border-gray-100 pt-3">
-    <div className="flex items-center space-x-2">
-      <span className="text-[13px]">{likes}</span>
-      <span className="text-[13px]">Likes</span>
+const TwitterCard = ({ username, handle, content, avatar, time, link, likes, retweets }) => {
+  return (
+    <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="flex items-center mb-4">
+        <img src={avatar} alt={username} className="w-12 h-12 rounded-full" />
+        <div className="ml-4">
+          <h4 className="font-bold">{username}</h4>
+          <p className="text-gray-500">@{handle}</p>
+        </div>
+      </div>
+      <p className="text-gray-800 mb-4">{content}</p>
+      <p className="text-gray-500 text-sm mb-4">{time}</p>
+      <div className="flex items-center space-x-4 text-gray-500 border-t border-gray-100 pt-3">
+        <div className="flex items-center space-x-2">
+          <span className="text-[13px]">{likes}</span>
+          <span className="text-[13px]">Likes</span>
+        </div>
+        <div className="flex items-center space-x-2">
+          <span className="text-[13px]">{retweets}</span>
+          <span className="text-[13px]">Retweets</span>
+        </div>
+      </div>
     </div>
-    <div className="flex items-center space-x-2">
-      <span className="text-[13px]">{retweets}</span>
-      <span className="text-[13px]">Retweets</span>
-    </div>
-  </div>
+  );
 };
 
-// Update the testimonials array with new engagement metrics
-const testimonials = [
+const Approval = () => {
+  const testimonials = [
     {
       username: "Alex Thompson",
       handle: "alex_tech",
@@ -77,10 +89,9 @@ const testimonials = [
       likes: "156",
       retweets: "29"
     }
-];
+  ];
 
-// Update the section title
-return (
+  return (
     <section id="testimonial" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Companies Section */}
@@ -88,7 +99,9 @@ return (
           <h3 className="text-center text-xl text-gray-600 mb-12">
             My clients have been hired at:
           </h3>
-          {/* ... keep existing companies grid ... */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+            {/* Add your company logos here */}
+          </div>
         </div>
 
         {/* Testimonials Section */}
@@ -101,7 +114,15 @@ return (
           </h2>
         </div>
 
-        {/* ... keep existing slider implementation ... */}
+        {/* Testimonials Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {testimonials.map((testimonial, index) => (
+            <TwitterCard key={index} {...testimonial} />
+          ))}
+        </div>
       </div>
     </section>
-);
+  );
+};
+
+export default Approval;
