@@ -26,8 +26,8 @@ const TemplateCard = ({ image, users }) => {
         {/* Action Button - Shows on Hover */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <button 
-            onClick={() => router.push('/templates')}
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors whitespace-nowrap"
+            onClick={() => router.push('/order')}
+            className="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700"
           >
             Use this template
           </button>

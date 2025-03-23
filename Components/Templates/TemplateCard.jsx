@@ -1,4 +1,9 @@
-const TemplateCard = ({ template, onSelect }) => {
+"use client";
+import { useRouter } from 'next/navigation';
+
+const TemplateCard = ({ template }) => {
+  const router = useRouter();
+
   return (
     <div className="group relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
       {/* Template Image */}
@@ -12,7 +17,7 @@ const TemplateCard = ({ template, onSelect }) => {
         {/* Overlay on hover */}
         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
           <button
-            onClick={() => onSelect(template)}
+            onClick={() => router.push('/order')}
             className="opacity-0 group-hover:opacity-100 bg-blue-600 text-white px-6 py-2 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300"
           >
             Use Template

@@ -20,12 +20,11 @@ const Navbar = () => {
   }, []);
 
   const navigation = [
-    { name: 'Templates', href: '#templates' },
-    { name: 'Features', href: '#features' },
+    { name: 'Services', href: '#templates' },
+    { name: 'Success Rate', href: '#features' },
     { name: 'Testimonials', href: '#testimonial' },
     { name: 'Pricing', href: '#pricing' },
-    {name: "contact Us", href: "#contact"},
-    { name: 'FAQ', href: '#faq' },
+    { name: 'Contact', href: '#contact' },
   ];
 
   const scrollToSection = (sectionId) => {
@@ -47,22 +46,17 @@ const Navbar = () => {
 
   return (
     <nav className={`fixed top-0 z-50 w-full transition-all duration-300 ${
-      scrolled ? 'bg-white' : 'bg-transparent'
+      scrolled ? 'bg-white shadow-md' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
+          {/* Replace logo with name */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center">
-              <Image
-                src="/logo.png"
-                alt="Resume.io Logo"
-                width={40}
-                height={40}
-                className="w-10 h-10"
-              />
-              <span className="ml-2 text-xl font-bold text-gray-900">Resume.io</span>
-            </Link>
+            <a href="/" className="flex items-center">
+              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                Nahom Kasa
+              </span>
+            </a>
           </div>
 
           {/* Desktop Navigation */}
@@ -77,8 +71,8 @@ const Navbar = () => {
               </button>
             ))}
             <button 
-              onClick={() => router.push('/templates')}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-700 transition-colors duration-200"
+              onClick={() => router.push('/order')}
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-700"
             >
               Get Started
             </button>
@@ -116,8 +110,8 @@ const Navbar = () => {
             </button>
           ))}
           <button 
-            onClick={() => router.push('/templates')}
-            className="w-full bg-blue-600 text-white px-3 py-2 rounded-lg text-base font-medium hover:bg-blue-700 transition-colors duration-200 mt-4"
+            onClick={() => router.push('/order')}
+            className="w-full bg-blue-600 text-white px-3 py-2 rounded-lg text-base font-medium hover:bg-blue-700"
           >
             Get Started
           </button>

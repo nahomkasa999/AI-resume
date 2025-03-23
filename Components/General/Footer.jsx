@@ -129,16 +129,15 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             {/* Logo and Copyright */}
             <div className="flex items-center space-x-4">
-              <Image
-                src="/logo.png"
-                alt="Resume.io Logo"
-                width={32}
-                height={32}
-                className="w-8 h-8"
-              />
+              <span className="text-2xl font-bold text-white">NAHOM KASA</span>
               <span className="text-gray-300">
-                © {new Date().getFullYear()} Resume.io. All rights reserved.
+                © {new Date().getFullYear()} All rights reserved.
               </span>
+            </div>
+
+            {/* Add brief description */}
+            <div className="text-gray-400 text-sm max-w-md text-center md:text-right">
+              Professional Resume Expert | Helping professionals land their dream jobs worldwide | Available 24/7 on Telegram @nahomkasa
             </div>
 
             {/* Social Links */}

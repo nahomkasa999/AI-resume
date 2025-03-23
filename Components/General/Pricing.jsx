@@ -1,9 +1,11 @@
 "use client";
 import { useState } from 'react';
 import { CheckIcon } from '@heroicons/react/24/solid';
+import { useRouter } from 'next/navigation';
 
 const Pricing = () => {
   const [isAnnual, setIsAnnual] = useState(true);
+  const router = useRouter();
 
   const pricingTiers = [
     {
@@ -21,7 +23,8 @@ const Pricing = () => {
         "Email support"
       ],
       buttonText: "Get Started",
-      buttonStyle: "border-2 border-blue-600 text-blue-600 hover:bg-blue-50"
+      buttonStyle: "border-2 border-blue-600 text-blue-600 hover:bg-blue-50",
+      buttonAction: () => router.push('/order')
     },
     {
       name: "Professional",
@@ -42,7 +45,8 @@ const Pricing = () => {
       ],
       buttonText: "Start Free Trial",
       buttonStyle: "bg-blue-600 text-white hover:bg-blue-700",
-      popular: true
+      popular: true,
+      buttonAction: () => router.push('/order')
     },
     {
       name: "Enterprise",
@@ -62,7 +66,8 @@ const Pricing = () => {
         "Bulk generation"
       ],
       buttonText: "Contact Sales",
-      buttonStyle: "border-2 border-blue-600 text-blue-600 hover:bg-blue-50"
+      buttonStyle: "border-2 border-blue-600 text-blue-600 hover:bg-blue-50",
+      buttonAction: () => router.push('/order')
     }
   ];
 
@@ -133,7 +138,8 @@ const Pricing = () => {
               </div>
 
               <button
-                className={`w-full rounded-lg px-4 py-2 text-sm font-semibold transition-colors duration-200 ${tier.buttonStyle}`}
+                onClick={tier.buttonAction}
+                className={`w-full rounded-lg px-4 py-2 text-sm font-semibold ${tier.buttonStyle}`}
               >
                 {tier.buttonText}
               </button>
